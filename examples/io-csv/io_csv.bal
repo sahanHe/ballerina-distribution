@@ -15,14 +15,13 @@ public function main() returns error? {
     string[][] readCsv = check io:fileReadCsv(csvFilePath1);
     io:println(readCsv);
 
-    // Writes the given content as a stream to a CSV file in csvFilePath2,
-    // if both write and read steps for csvFilePath1 are successful.
+    // Writes the given content as a stream to a CSV file in csvFilePath2.
     check io:fileWriteCsvFromStream(csvFilePath2, csvContent.toStream());
-    // Reads the previously saved CSV file in csvFilePath2 as a stream,
+    // Reads the CSV file in csvFilePath2 as a stream,
     // if the previous step of writing a CSV file from stream was successful.
     stream<string[], io:Error?> csvStream = check
                                         io:fileReadCsvAsStream(csvFilePath2);
-    // Iterates through the stream object and prints the content.
+    // Iterates through the stream and prints the content.
     check csvStream.forEach(function(string[] val) {
                               io:println(val);
                           });
